@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=75", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gesturelab"
+version = "0.1.0"
+description = "Laboratório desktop local para aprender machine learning com gestos"
+readme = "README.md"
+requires-python = ">=3.11,<3.14"
+license = "MIT"
+dependencies = [
+  "mediapipe==0.10.35", "opencv-contrib-python>=4.10,<5", "numpy>=2,<3",
+  "pandas>=2.2,<3", "scikit-learn>=1.6,<2", "PySide6>=6.8,<7",
+  "matplotlib>=3.9,<4", "pyarrow>=19,<25", "joblib>=1.4,<2"
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "pytest-qt>=4.4,<5", "ruff>=0.12"]
+
+[project.scripts]
+gesturelab = "gesturelab.cli:main"
+
+[project.gui-scripts]
+gesturelab-desktop = "gesturelab.ui:run"
+
+[tool.setuptools.packages.find]
+include = ["gesturelab*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+qt_api = "pyside6"
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F"]

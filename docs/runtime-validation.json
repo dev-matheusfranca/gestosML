@@ -1,0 +1,51 @@
+{
+  "platform": "Windows-10-10.0.19045-SP0",
+  "python": "3.13.14",
+  "dependencies": {
+    "mediapipe": "0.10.35",
+    "opencv-contrib-python": "4.14.0.94",
+    "numpy": "2.5.3",
+    "pandas": "2.3.3",
+    "scikit-learn": "1.9.1",
+    "PySide6": "6.11.2",
+    "pyarrow": "24.0.0"
+  },
+  "model": "hand_landmarker/float16/1",
+  "images_saved": false,
+  "method": "CPU; 5 aquecimentos; imagem preta 640x480, sem mãos; perf_counter; não mede reconhecimento real",
+  "detector_smoke": {
+    "status": "passed",
+    "frames": 60,
+    "hands_on_black_frame": 0,
+    "median_ms": 16.081649984698743,
+    "p95_ms": 30.702254970674403
+  },
+  "camera": {
+    "index": 0,
+    "attempts": [
+      {
+        "attempt": 1,
+        "opened": true,
+        "frames_read": 60,
+        "duration_s": 2.021437900024466,
+        "capture_fps": 29.681841821247044,
+        "resolution": [
+          640,
+          480
+        ]
+      },
+      {
+        "attempt": 2,
+        "opened": true,
+        "frames_read": 60,
+        "duration_s": 2.0217099000001326,
+        "capture_fps": 29.677848439084194,
+        "resolution": [
+          640,
+          480
+        ]
+      }
+    ],
+    "note": "Captura pura, sem classificação; nenhum frame salvo"
+  }
+}

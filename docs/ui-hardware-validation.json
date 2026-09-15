@@ -1,0 +1,30 @@
+{
+  "mode": "Qt offscreen com webcam física; sem imagens salvas",
+  "frames": [
+    "ready",
+    "ready",
+    "ready",
+    "ready",
+    "ready",
+    "ready",
+    "ready",
+    "ready",
+    "ready",
+    "ready",
+    "ready",
+    "ready",
+    "ready",
+    "ready",
+    "ready",
+    "ready",
+    "ready",
+    "ready",
+    "ready",
+    "ready"
+  ],
+  "errors": [],
+  "openings": 2,
+  "worker_released": true,
+  "samples_saved": 0,
+  "window_closed": true
+}

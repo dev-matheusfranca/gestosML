@@ -1,0 +1,39 @@
+{
+  "method": "640x480 CPU, 45 frames por abertura; captura+extração+desenho; sem classificador; nenhuma imagem persistida",
+  "attempts": [
+    {
+      "frames": 45,
+      "states": {
+        "no_hand": 45
+      },
+      "errors": [],
+      "images_saved": false,
+      "duration_s": 3.973871299996972,
+      "stopped": true,
+      "median_extractor_ms": 17.629100009799004,
+      "median_pipeline_fps": 32.132886678291314
+    },
+    {
+      "frames": 45,
+      "states": {
+        "no_hand": 45
+      },
+      "errors": [],
+      "images_saved": false,
+      "duration_s": 2.7886827000183985,
+      "stopped": true,
+      "median_extractor_ms": 31.863899959716946,
+      "median_pipeline_fps": 31.147451286385767
+    }
+  ],
+  "unavailable_camera": {
+    "frames": 0,
+    "states": {},
+    "errors": [
+      "Câmera indisponível. Confira o índice, a permissão do Windows e outros aplicativos usando a câmera."
+    ],
+    "images_saved": false,
+    "duration_s": 0.00882149999961257,
+    "stopped": true
+  }
+}
