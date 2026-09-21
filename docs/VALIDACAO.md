@@ -1,13 +1,54 @@
-# Validação da entrega — 15/09/2026
+# Validação da entrega
 
 ## Condições de pronto
 
 **Software implementado e validado tecnicamente:** fluxo local de coleta, persistência,
 versionamento, treinamento, relatórios, inferência, revisão e comparação disponível.
-**Experimento real ainda não validado:** não há avaliação independente do reconhecimento.
+**Experimento real inicial registrado:** a revisão de 19/09/2026 encontrou três experimentos
+concluídos e um teste final salvo, posteriores ao estado inicial descrito nesta documentação.
+São resultados de uma pessoa na mesma posição; não demonstram generalização entre pessoas
+ou condições. A consulta aos registros não equivale a repetir ou certificar a coleta humana.
 O repositório não distribui coletas pessoais; uma instalação nova começa sem amostras.
 
-## Evidências executadas
+## Revisão do portfólio — 19/09/2026
+
+- Leitura do SQLite existente em modo somente leitura, sem inicializar o Store da aplicação.
+- 704 amostras, cinco classes, quatro sessões com dados e uma vazia; duas versões locais.
+- Mesma versão de 704 amostras, linhagem, protocolo, estratégia e semente nos três experimentos.
+- Treino/validação/teste: 342/198/164; uma avaliação final salva do Forest, conferida entre
+  o registro de reserva final e o relatório do experimento.
+- Seis casos difíceis pendentes, sem comparação V1/V2 ou avaliação de desafio salva.
+- Autor confirmou uma pessoa e mesma posição; independência física das sessões não comprovada.
+- Novo exportador agregado não carrega modelos, não reavalia teste final, não abre webcam,
+  não escreve no banco nem inclui dados livres da coleta no relatório.
+
+Resultados numéricos: [relatório comparativo](RELATORIO_COMPARATIVO.md) e
+[portfolio-results.json](portfolio-results.json).
+
+| Verificação executada nesta revisão | Resultado |
+| --- | --- |
+| Suíte completa (`python -m pytest -q`) | **56 aprovados**, sendo 29 novos testes do exportador |
+| Ruff (`python -m ruff check gesturelab scripts tests`) | Aprovado |
+| Compilação dos dois arquivos Python novos (`compileall`) | Aprovada |
+| Dependências (`python -m pip check`) | Sem incompatibilidades declaradas |
+| JSON agregado (`scripts/export_portfolio_report.py --check docs/portfolio-results.json`) | Coincide com os resultados salvos |
+| Integridade do banco durante a conferência | SHA-256 idêntico antes e depois |
+| Higiene do diff (`git diff --check`) | Aprovada |
+
+Os testes novos cobrem ausência de dados privados no JSON, reordenação das matrizes,
+acesso somente leitura, banco inexistente sem criação, coorte ambígua, números inválidos,
+split inconsistente, métricas condicionais sem previsões aceitas, contagens incompatíveis,
+avaliação final vazia/divergente/duplicada e detecção de relatório desatualizado
+sem sobrescrita. As mutações desses testes ocorrem apenas em bancos sintéticos temporários.
+Nenhuma coleta, revisão humana, ativação de modelo, treino, avaliação final ou gravação
+de vídeo foi executada sobre os dados reais nesta revisão.
+Revisão independente do exportador e da consistência documental concluída sem bloqueios,
+após os ajustes e testes de integridade do relatório.
+
+## Evidências históricas executadas — 15/09/2026
+
+Os testes e smokes a seguir pertencem à entrega inicial. Não foram todos repetidos na
+revisão de documentação e exportação; em particular, a webcam não foi reaberta.
 
 | Verificação | Resultado |
 | --- | --- |
@@ -27,7 +68,7 @@ O repositório não distribui coletas pessoais; uma instalação nova começa se
 Os dados sintéticos só verificam o software. Nenhuma métrica desses testes é apresentada
 como qualidade real de reconhecimento no README, no model card ou na tela inicial.
 
-## Webcam e hardware
+## Webcam e hardware — ensaio histórico de 15/09/2026
 
 Windows 10 x64 10.0.19045; Intel Core i7-7700HQ, 4 núcleos / 8 threads; Python 3.13.14.
 HD WebCam, índice 0, resolução solicitada e recebida 640 × 480, processamento CPU.
@@ -58,11 +99,11 @@ com o classificador escolhido e registrar o cenário.
 | Marco | Implementação e conceito | Validação | Etapa humana |
 | --- | --- | --- | --- |
 | A — Base | Ambiente virtual, OpenCV, Hand Landmarker, worker Qt; detector pré-treinado | Importações, hash, webcam real e encerramento | Conferir uma e duas mãos, ocupação por outro aplicativo |
-| B — Dados | Sessões, rótulos, pontos, SQLite, shards Parquet, versões; diversidade e integridade | Inválidos, revisão, exclusão, hash e histórico | Coletar ao menos 4 sessões com os gestos |
-| C — ML | Atributos, quatro modelos, grupos, validação/teste, relatórios; generalização | Treino/recarga, grupos disjuntos, classes, reserva final e cancelamento | Avaliar reconhecimento real independente |
+| B — Dados | Sessões, rótulos, pontos, SQLite, shards Parquet, versões; diversidade e integridade | Inválidos, revisão, exclusão, hash e histórico; 704 amostras reais registradas | Coletar com diversidade e independência documentadas |
+| C — ML | Atributos, quatro modelos, grupos, validação/teste, relatórios; generalização | Testes sintéticos e resultados reais salvos de três modelos | Validar generalização em nova coleta independente |
 | D — Demonstração | Pontuação, incerteza, consenso temporal e marcador interno; latência e estabilidade | Neutro, cooldown, estados e janela com webcam | Testar gestos semelhantes e novos gestos |
 | E — Experimentação | Revisão de erros, V2 e orçamento equivalente; hipótese controlada | Rótulos humanos, IDs congelados, braços equivalentes | Comparar V1/V2 com dados reais |
-| F — Portfólio | Interface, documentação, roteiro e rascunho; comunicação de evidências | Captura real da interface vazia e links locais | Gravar demonstração real e preencher resultados |
+| F — Portfólio | Interface, case, roteiro e resultados agregados; comunicação de evidências | Captura histórica da interface e relatório conferido com o banco | Gravar demonstração real e decidir publicação |
 
 ## Decisões e correções verificadas
 
@@ -78,12 +119,14 @@ com o classificador escolhido e registrar o cenário.
 
 ## Não validado e limites restantes
 
-1. Reconhecimento correto dos cinco gestos em pessoas/sessões reais.
-2. Precisão, recall, F1, cobertura, desconhecidos e comparação V1/V2 reais.
+1. Generalização dos cinco gestos para outras pessoas e condições; a V1 é restrita a uma pessoa.
+2. Desafio de gestos desconhecidos e comparação V1/V2 reais. Métricas da V1 já estão documentadas.
 3. Duas mãos reais e câmera ocupada por outro aplicativo, com julgamento humano.
 4. Diversidade de participantes, luz, oclusões, inclinação e mudança de distância.
 5. Distribuição como executável instalável e outros sistemas operacionais; esta entrega
    usa o ambiente Python local. A publicação do código não inclui um executável instalável.
+6. Gravação de demonstração real, instalação limpa atual e ausência total de telemetria da
+   dependência MediaPipe; a execução local, sozinha, não comprova ausência de tráfego.
 
 Cancelamento é cooperativo e pode aguardar um ajuste/fold curto em andamento. O teste final
 é uma proteção de protocolo local, não uma barreira contra alguém editar o banco manualmente.
@@ -94,6 +137,8 @@ Dados numéricos e pseudônimos continuam sendo dados que merecem cuidado ao com
 ```powershell
 .\.venv\Scripts\python.exe -m pytest -q
 .\.venv\Scripts\python.exe -m ruff check gesturelab scripts tests
+.\.venv\Scripts\python.exe -m pip check
+.\.venv\Scripts\python.exe scripts/export_portfolio_report.py --check docs/portfolio-results.json
 .\.venv\Scripts\python.exe scripts/probe_runtime.py --camera 0
 .\.venv\Scripts\python.exe scripts/probe_camera_worker.py
 .\.venv\Scripts\python.exe scripts/probe_ui_hardware.py

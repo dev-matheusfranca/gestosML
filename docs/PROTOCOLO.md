@@ -59,6 +59,30 @@ Use somente falhas de desenvolvimento para selecionar exemplos difíceis. A revi
 de dataset devem ser sinalizadas. Mudanças de classes ou extrator exigem novo desenho do
 experimento. Nunca ajuste e escolha novamente usando o teste final já consultado.
 
+## Próxima coleta após a V1 documentada
+
+A V1 já tem teste final salvo, mas foi coletada por uma pessoa na mesma posição. Não
+reescrever essa condição nem reutilizar o teste para selecionar outro modelo. Para ampliar
+a evidência, criar uma coleta separada, mantendo a V1 e seus resultados preservados:
+
+```powershell
+.\.venv\Scripts\python.exe -m gesturelab --data-dir data/coleta-v2 gui
+```
+
+1. Definir o objetivo antes: robustez para a mesma pessoa em novas condições ou para outras
+   pessoas. O segundo exige protocolo por participante e participantes realmente distintos.
+2. Registrar por rodada as condições, com pausas reais e variações planejadas de posição,
+   distância e iluminação. Não atribuir independência apenas por abrir outra sessão.
+3. Coletar todas as classes em cada grupo e reservar grupos de validação/teste antes das escolhas.
+   As quantidades mínimas acima permitem dividir os dados, mas não garantem validade estatística.
+4. Definir o critério de seleção: por exemplo macro-F1 global mais uma cobertura mínima
+   declarada. Registrar cobertura e acerto condicional juntos para todos os modelos.
+5. Rever erros somente do desenvolvimento. Criar desafio separado de desconhecidos e
+   consultar o novo teste final uma vez, depois de congelar as escolhas.
+
+As seis pendências de revisão da V1 não foram corrigidas automaticamente: exigem rótulo
+humano. Uma melhora só pode ser anunciada quando medida, não por haver mais amostras.
+
 ## Checklist humano
 
 - [ ] Zero mãos, uma mão, duas mãos e mão parcialmente fora da imagem.

@@ -6,12 +6,39 @@ Aplicação desktop em Python, com webcam contínua, coleta supervisionada, comp
 modelos e revisão de erros. Interface e documentação em português. Processamento local,
 sem serviços pagos, API externa de IA ou publicação automática.
 
-> **Software e experimento são coisas diferentes.** A implementação pode ser testada
-> com dados sintéticos; a qualidade do reconhecimento depende de você coletar gestos reais
-> em sessões independentes. Esta entrega não contém métricas inventadas de reconhecimento.
+## Qual problema resolve?
 
-Validação desta entrega: **27 testes aprovados**, webcam física em 640 × 480 testada,
-abertura/reabertura/encerramento confirmados. [Evidências e limites](docs/VALIDACAO.md).
+Para quem está aprendendo machine learning, um resultado isolado não mostra como os dados,
+a separação de sessões e a rejeição de previsões afetam um modelo. O GestureLab reúne esse
+ciclo em uma interface: **coletar → comparar → demonstrar → investigar erros**. É uma
+ferramenta educacional experimental, não um produto validado para uso crítico.
+
+## Resultados reais disponíveis
+
+Consulta dos resultados locais salvos em **19/09/2026**: **704 amostras, cinco classes,
+quatro sessões com dados e três modelos comparados**, usando a mesma versão e divisão.
+O autor confirmou que toda a coleta foi feita **por uma única pessoa, na mesma posição**.
+
+| Modelo | Acurácia na validação | Cobertura | Acerto entre previsões aceitas |
+| --- | --- | --- | --- |
+| Dummy (referência) | 19,19% | 100,00% | 19,19% |
+| Regressão logística | 96,97% | 94,95% | 98,40% |
+| Random Forest | 89,90% | 63,13% | 100,00% |
+
+O teste final salvo do Random Forest teve **96,34% de acurácia global**, cobertura de
+**78,05%** e 100% de acerto nas **128 previsões aceitas**, com **36 rejeitadas**.
+Isso não significa reconhecer corretamente qualquer gesto nem atender outras pessoas.
+A regressão logística liderou a validação em acurácia global, macro-F1, cobertura e velocidade;
+o Forest teve maior acerto condicional, aceitando menos exemplos.
+
+> **Software, experimento e generalização são coisas diferentes.** Os testes automatizados
+> usam dados sintéticos. As métricas acima vêm de experimentos locais salvos, não foram
+> recalculadas nesta revisão e não demonstram desempenho com outras pessoas ou condições.
+> Quatro IDs de sessão não garantem quatro coletas fisicamente independentes.
+
+[Comparação e explicação da escolha](docs/RELATORIO_COMPARATIVO.md) ·
+[Métricas agregadas verificáveis](docs/portfolio-results.json) ·
+[Validações técnicas e limites](docs/VALIDACAO.md).
 
 ![Interface inicial real do GestureLab](assets/gesturelab-interface-inicial.png)
 
@@ -25,11 +52,13 @@ na pasta do projeto, ou execute:
 ```
 
 A câmera começa fechada. Em **Coleta**, selecione o índice `0` e clique para abri-la.
-O aplicativo não precisa de internet depois da instalação.
+Coleta, treino e inferência podem funcionar sem internet depois da instalação. Isso não
+equivale a garantir ausência de tentativas de comunicação por dependências.
 
 **Pendência de privacidade identificada:** o pacote binário MediaPipe 0.10.35 pode tentar
 enviar estatísticas de uso, embora o processamento das imagens seja local. A ausência total
-de telemetria ainda exige substituir essa distribuição. [Evidência e alternativas](docs/CORRECAO_COLETA.md).
+de telemetria ainda exige uma solução validada para essa dependência e monitoramento de tráfego.
+[Evidência e alternativas](docs/CORRECAO_COLETA.md).
 
 ### Como coletar: câmera aberta não significa gravação
 
@@ -55,6 +84,9 @@ Ambiente validado: Windows 10 x64, Python 3.13.14, CPU Intel Core i7-7700HQ.
 As versões efetivamente instaladas estão em `requirements.lock`.
 
 Com Git e Python 3.13 x64 instalados, baixe o projeto:
+
+O repositório está público (acesso conferido em 21/09/2026). As coletas e os modelos pessoais
+não acompanham o código; uma instalação nova começa sem esses dados.
 
 ```powershell
 git clone https://github.com/dev-matheusfranca/gestosML.git
@@ -96,6 +128,31 @@ Webcam → MediaPipe: 21 pontos → atributos → classificador próprio → pon
 O MediaPipe localiza pontos usando um componente pré-treinado. O GestureLab treina quatro
 classificadores com os exemplos rotulados: Dummy, regressão logística, Random Forest e MLP.
 Não usa as categorias de um reconhecedor pronto de gestos.
+O suporte a MLP está implementado e testado com dados sintéticos; o experimento real
+documentado comparou somente Dummy, regressão logística e Random Forest.
+
+## Conferir o relatório sem treinar novamente
+
+Na pasta do projeto, com o banco local da coleta disponível:
+
+```powershell
+.\.venv\Scripts\python.exe scripts/export_portfolio_report.py
+.\.venv\Scripts\python.exe scripts/export_portfolio_report.py --check docs/portfolio-results.json
+```
+
+O exportador usa apenas a biblioteca padrão, abre o SQLite em modo somente leitura e
+publica no terminal métricas agregadas, com aliases no lugar dos nomes das classes.
+Não carrega modelos, não abre a câmera, não reexecuta a avaliação final e não altera
+arquivos. O JSON versionado pode ser lido sem acesso ao banco privado. Uma instalação nova
+não terá esse banco e não poderá reproduzir a conferência dos resultados pessoais.
+
+O comando recusa comparações ambíguas (versões, estratégias, sementes ou execuções distintas)
+e métricas inconsistentes. Se houver novos experimentos, não substitua o relatório publicado
+automaticamente: escolha e documente um novo recorte. [Escopo do exportador](docs/RELATORIO_COMPARATIVO.md#conferência-e-privacidade).
+
+**A avaliação final desta V1 já foi consumida.** Não avalie outro modelo no mesmo conjunto
+para eleger um vencedor. Próximas escolhas podem usar desenvolvimento, mas uma nova conclusão
+final exige coleta realmente independente e um novo protocolo documentado.
 
 ## Comandos sem interface
 
@@ -155,7 +212,7 @@ recebidos de terceiros. Apagar dados atuais não apaga versões históricas e ex
 - [Protocolo de coleta e avaliação](docs/PROTOCOLO.md).
 - [Dataset card](docs/DATASET_CARD.md) e [model card](docs/MODEL_CARD.md).
 - [Relatório comparativo](docs/RELATORIO_COMPARATIVO.md).
-- [Roteiro de vídeo e rascunho LinkedIn](docs/PORTFOLIO.md).
+- [Case, texto para o portfólio e roteiro de vídeo real](docs/PORTFOLIO.md).
 - [Licença MIT](LICENSE) e [componentes de terceiros](THIRD_PARTY_NOTICES.md).
 
 Uma pessoa, uma mão e gestos estáticos. Não é reconhecimento de língua de sinais, identificação

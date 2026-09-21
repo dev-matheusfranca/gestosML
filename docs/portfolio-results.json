@@ -1,0 +1,401 @@
+{
+  "schema_version": 1,
+  "source": "saved_local_metrics_not_rerun",
+  "current_collection": {
+    "samples": 704,
+    "classes": 5,
+    "populated_sessions": 4,
+    "empty_sessions": 1,
+    "difficult": {
+      "pending": 6,
+      "reviewed": 0,
+      "discarded": 0
+    }
+  },
+  "comparison": {
+    "same_dataset_and_lineage": true,
+    "snapshot_samples": 704,
+    "class_count": 5,
+    "strategy": "normalized",
+    "protocol": "session",
+    "seed": 42,
+    "split": {
+      "train": 342,
+      "validation": 198,
+      "test_reserved": 164
+    },
+    "experiments": [
+      {
+        "model": "dummy",
+        "threshold": 0,
+        "training_duration_s": 0.0629408999811858,
+        "classifier_latency_ms": 0.30923500016797334,
+        "validation": {
+          "accuracy": 0.1919191919191919,
+          "macro_f1": 0.06440677966101695,
+          "coverage": 1,
+          "accepted_accuracy": 0.1919191919191919,
+          "accepted_macro_f1": 0.06440677966101695,
+          "n": 198,
+          "accepted": 198,
+          "rejected": 0,
+          "accepted_correct": 38,
+          "classes": [
+            "class_1",
+            "class_2",
+            "class_3",
+            "class_4",
+            "class_5"
+          ],
+          "confusion_matrix": [
+            [
+              0,
+              0,
+              40,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              40,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              38,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              38,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              42,
+              0,
+              0
+            ]
+          ],
+          "per_class": {
+            "class_1": {
+              "precision": 0,
+              "recall": 0,
+              "f1-score": 0,
+              "support": 40
+            },
+            "class_2": {
+              "precision": 0,
+              "recall": 0,
+              "f1-score": 0,
+              "support": 40
+            },
+            "class_3": {
+              "precision": 0.1919191919191919,
+              "recall": 1,
+              "f1-score": 0.3220338983050847,
+              "support": 38
+            },
+            "class_4": {
+              "precision": 0,
+              "recall": 0,
+              "f1-score": 0,
+              "support": 38
+            },
+            "class_5": {
+              "precision": 0,
+              "recall": 0,
+              "f1-score": 0,
+              "support": 42
+            }
+          }
+        },
+        "final": null,
+        "challenge_recorded": false
+      },
+      {
+        "model": "logistic",
+        "threshold": 0.7,
+        "training_duration_s": 0.17983849998563528,
+        "classifier_latency_ms": 0.46957500162534416,
+        "validation": {
+          "accuracy": 0.9696969696969697,
+          "macro_f1": 0.9699812382739212,
+          "coverage": 0.9494949494949495,
+          "accepted_accuracy": 0.9840425531914894,
+          "accepted_macro_f1": 0.9826839826839826,
+          "n": 198,
+          "accepted": 188,
+          "rejected": 10,
+          "accepted_correct": 185,
+          "classes": [
+            "class_1",
+            "class_2",
+            "class_3",
+            "class_4",
+            "class_5"
+          ],
+          "confusion_matrix": [
+            [
+              40,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              40,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              38,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              38,
+              0
+            ],
+            [
+              0,
+              0,
+              6,
+              0,
+              36
+            ]
+          ],
+          "per_class": {
+            "class_1": {
+              "precision": 1,
+              "recall": 1,
+              "f1-score": 1,
+              "support": 40
+            },
+            "class_2": {
+              "precision": 1,
+              "recall": 1,
+              "f1-score": 1,
+              "support": 40
+            },
+            "class_3": {
+              "precision": 0.8636363636363636,
+              "recall": 1,
+              "f1-score": 0.926829268292683,
+              "support": 38
+            },
+            "class_4": {
+              "precision": 1,
+              "recall": 1,
+              "f1-score": 1,
+              "support": 38
+            },
+            "class_5": {
+              "precision": 1,
+              "recall": 0.8571428571428571,
+              "f1-score": 0.9230769230769231,
+              "support": 42
+            }
+          }
+        },
+        "final": null,
+        "challenge_recorded": false
+      },
+      {
+        "model": "forest",
+        "threshold": 0.8,
+        "training_duration_s": 1.7756823999807239,
+        "classifier_latency_ms": 14.564015000360087,
+        "validation": {
+          "accuracy": 0.898989898989899,
+          "macro_f1": 0.8978876775146502,
+          "coverage": 0.6313131313131313,
+          "accepted_accuracy": 1,
+          "accepted_macro_f1": 1,
+          "n": 198,
+          "accepted": 125,
+          "rejected": 73,
+          "accepted_correct": 125,
+          "classes": [
+            "class_1",
+            "class_2",
+            "class_3",
+            "class_4",
+            "class_5"
+          ],
+          "confusion_matrix": [
+            [
+              39,
+              0,
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              40,
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              37,
+              0,
+              0
+            ],
+            [
+              0,
+              2,
+              0,
+              36,
+              0
+            ],
+            [
+              1,
+              0,
+              15,
+              0,
+              26
+            ]
+          ],
+          "per_class": {
+            "class_1": {
+              "precision": 0.9512195121951219,
+              "recall": 0.975,
+              "f1-score": 0.9629629629629629,
+              "support": 40
+            },
+            "class_2": {
+              "precision": 0.9523809523809523,
+              "recall": 1,
+              "f1-score": 0.975609756097561,
+              "support": 40
+            },
+            "class_3": {
+              "precision": 0.6981132075471698,
+              "recall": 0.9736842105263158,
+              "f1-score": 0.8131868131868132,
+              "support": 38
+            },
+            "class_4": {
+              "precision": 1,
+              "recall": 0.9473684210526315,
+              "f1-score": 0.972972972972973,
+              "support": 38
+            },
+            "class_5": {
+              "precision": 1,
+              "recall": 0.6190476190476191,
+              "f1-score": 0.7647058823529411,
+              "support": 42
+            }
+          }
+        },
+        "final": {
+          "accuracy": 0.9634146341463414,
+          "macro_f1": 0.9646061726897891,
+          "coverage": 0.7804878048780488,
+          "accepted_accuracy": 1,
+          "accepted_macro_f1": 1,
+          "n": 164,
+          "accepted": 128,
+          "rejected": 36,
+          "accepted_correct": 128,
+          "classes": [
+            "class_1",
+            "class_2",
+            "class_3",
+            "class_4",
+            "class_5"
+          ],
+          "confusion_matrix": [
+            [
+              29,
+              0,
+              4,
+              0,
+              0
+            ],
+            [
+              0,
+              34,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              36,
+              0,
+              0
+            ],
+            [
+              0,
+              2,
+              0,
+              31,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              28
+            ]
+          ],
+          "per_class": {
+            "class_1": {
+              "precision": 1,
+              "recall": 0.8787878787878788,
+              "f1-score": 0.9354838709677419,
+              "support": 33
+            },
+            "class_2": {
+              "precision": 0.9444444444444444,
+              "recall": 1,
+              "f1-score": 0.9714285714285714,
+              "support": 34
+            },
+            "class_3": {
+              "precision": 0.9,
+              "recall": 1,
+              "f1-score": 0.9473684210526315,
+              "support": 36
+            },
+            "class_4": {
+              "precision": 1,
+              "recall": 0.9393939393939394,
+              "f1-score": 0.96875,
+              "support": 33
+            },
+            "class_5": {
+              "precision": 1,
+              "recall": 1,
+              "f1-score": 1,
+              "support": 28
+            }
+          }
+        },
+        "challenge_recorded": false
+      }
+    ]
+  }
+}
